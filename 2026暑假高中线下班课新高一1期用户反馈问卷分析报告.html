@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026暑假高中线下班课新高一1期用户反馈问卷分析报告（更新至7月23日）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: #f0f4f9;
+            color: #1e293b;
+            padding: 0;
+            display: flex;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: #ffffff;
+            border-right: 1px solid #e2e8f0;
+            padding: 32px 20px;
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: 2px 0 12px rgba(0,0,0,0.04);
+        }
+        .sidebar-brand {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .sidebar-brand span {
+            background: #2563eb;
+            color: white;
+            font-size: 12px;
+            border-radius: 6px;
+            padding: 2px 10px;
+            margin-left: 4px;
+        }
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+        .toc-list li { margin-bottom: 2px; }
+        .toc-list a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            color: #334155;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.15s;
+            border-left: 3px solid transparent;
+        }
+        .toc-list a:hover { background: #f1f5f9; color: #0f172a; border-left-color: #2563eb; }
+        .toc-icon { font-size: 16px; width: 24px; text-align: center; flex-shrink: 0; }
+        .toc-list .sub-list {
+            list-style: none;
+            padding-left: 36px;
+            margin-top: 2px;
+            margin-bottom: 4px;
+        }
+        .toc-list .sub-list a {
+            font-size: 13px;
+            font-weight: 400;
+            color: #475569;
+            padding: 4px 10px;
+            border-left-color: transparent;
+        }
+        .toc-list .sub-list a:hover { background: #f1f5f9; color: #0f172a; border-left-color: #94a3b8; }
+        .sidebar-footer {
+            margin-top: 30px;
+            padding-top: 16px;
+            border-top: 1px solid #e9edf2;
+            font-size: 12px;
+            color: #94a3b8;
+            text-align: center;
+        }
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 40px 48px;
+            max-width: calc(100% - 280px);
+        }
+        .slide {
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.12);
+            padding: 40px 48px;
+            scroll-margin-top: 20px;
+        }
+        .slide:last-child { margin-bottom: 0; }
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            border-bottom: 2px solid #eef2f6;
+            padding-bottom: 12px;
+        }
+        .slide-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .slide-header .page-tag {
+            font-size: 13px;
+            color: #94a3b8;
+            background: #f1f5f9;
+            padding: 4px 14px;
+            border-radius: 20px;
+        }
+        .subhead {
+            color: #475569;
+            background: #f8fafc;
+            padding: 12px 20px;
+            border-radius: 12px;
+            border-left: 4px solid #2563eb;
+            font-size: 16px;
+            margin-bottom: 28px;
+        }
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: #f8fafc;
+            border-radius: 14px;
+            padding: 18px 22px;
+            border: 1px solid #e9eef3;
+        }
+        .stat-card .label { font-size: 13px; font-weight: 500; color: #64748b; text-transform: uppercase; letter-spacing: 0.3px; }
+        .stat-card .value { font-size: 34px; font-weight: 700; color: #0f172a; margin-top: 4px; }
+        .stat-card .sub { font-size: 13px; color: #475569; margin-top: 2px; }
+        .badge-green { background: #dcfce7; color: #166534; padding: 2px 14px; border-radius: 20px; font-weight: 600; font-size: 13px; display: inline-block; }
+        .badge-yellow { background: #fef9c3; color: #854d0e; padding: 2px 14px; border-radius: 20px; font-weight: 600; font-size: 13px; display: inline-block; }
+        .badge-red { background: #fee2e2; color: #991b1b; padding: 2px 14px; border-radius: 20px; font-weight: 600; font-size: 13px; display: inline-block; }
+
+        .chart-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 16px 0 8px;
+        }
+        .chart-box {
+            background: #fafcff;
+            border-radius: 14px;
+            padding: 20px 24px;
+            border: 1px solid #e9edf2;
+        }
+        .chart-box h4 { font-size: 15px; font-weight: 600; color: #1e293b; margin-bottom: 12px; text-align: center; }
+        .bar-wrapper { display: flex; flex-direction: column; gap: 6px; }
+        .bar-row { display: flex; align-items: center; gap: 8px; }
+        .bar-label { width: 50px; font-size: 13px; color: #475569; text-align: right; }
+        .bar-track { flex: 1; height: 20px; background: #e9edf2; border-radius: 12px; overflow: hidden; }
+        .bar-fill { height: 100%; border-radius: 12px; background: #2563eb; transition: width 0.6s ease; }
+        .bar-fill.green { background: #22c55e; }
+        .bar-fill.orange { background: #f59e0b; }
+        .bar-fill.red { background: #ef4444; }
+        .bar-value { width: 38px; font-size: 13px; font-weight: 600; color: #0f172a; }
+        .nps-badge { display: inline-block; background: #dbeafe; color: #1e40af; padding: 4px 14px; border-radius: 30px; font-size: 14px; font-weight: 600; }
+
+        .stack-bar {
+            display: flex;
+            height: 32px;
+            border-radius: 30px;
+            overflow: hidden;
+            margin: 6px 0 10px;
+            background: #e9edf2;
+            position: relative;
+        }
+        .stack-seg {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+            transition: width 0.6s ease;
+            min-width: 0;
+            white-space: nowrap;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        }
+        .stack-seg .pct { font-size: 13px; font-weight: 700; color: #fff; }
+        .stack-seg.hide-label .pct { display: none; }
+        .seg-10 { background: #22c55e; }
+        .seg-79 { background: #3b82f6; }
+        .seg-46 { background: #f59e0b; }
+        .seg-03 { background: #ef4444; }
+
+        .pct-labels {
+            display: flex;
+            justify-content: space-around;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1e293b;
+            padding: 4px 0 2px;
+            flex-wrap: wrap;
+            gap: 6px 16px;
+        }
+        .pct-labels .item { display: flex; align-items: center; gap: 4px; }
+        .pct-labels .dot { display: inline-block; width: 12px; height: 12px; border-radius: 4px; margin-right: 4px; }
+        .dot-10 { background: #22c55e; }
+        .dot-79 { background: #3b82f6; }
+        .dot-46 { background: #f59e0b; }
+        .dot-03 { background: #ef4444; }
+
+        .table-wrap {
+            max-height: 480px;
+            overflow-y: auto;
+            border: 1px solid #e9edf2;
+            border-radius: 12px;
+            margin-top: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        table th {
+            background: #f1f5f9;
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #1e293b;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+        table td { padding: 8px 12px; border-bottom: 1px solid #eef2f6; vertical-align: middle; }
+        table tr:hover { background: #f8fafc; }
+        .subject-group td, .campus-group td { background: #eef2ff; font-weight: 700; color: #1e40af; }
+        .campus-group td { background: #f1f5f9; color: #0f172a; }
+
+        details { margin-top: 2px; border: 1px solid #e2e8f0; border-radius: 6px; padding: 4px 10px; background: #fafcff; }
+        details summary { font-weight: 600; cursor: pointer; color: #2563eb; padding: 2px 0; font-size: 12px; }
+        details .case-item { padding: 3px 0 3px 14px; border-left: 3px solid #94a3b8; margin: 3px 0; font-size: 12px; color: #334155; line-height: 1.5; }
+        details .case-item strong { color: #0f172a; }
+
+        .qa-block {
+            margin-top: 8px;
+            padding: 10px 14px;
+            background: #f8fafc;
+            border-radius: 6px;
+            border-left: 4px solid #3b82f6;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .qa-block .qa-title { font-weight: 600; color: #1e40af; }
+        .qa-block ul { margin: 4px 0 0 18px; }
+        .qa-block ul li { margin-bottom: 4px; }
+
+        .priority-p0 { background: #fef2f2; border-left: 6px solid #dc2626; padding: 16px 20px; border-radius: 12px; margin-bottom: 12px; }
+        .priority-p1 { background: #fffbeb; border-left: 6px solid #f59e0b; padding: 16px 20px; border-radius: 12px; margin-bottom: 12px; }
+        .priority-p2 { background: #eff6ff; border-left: 6px solid #3b82f6; padding: 16px 20px; border-radius: 12px; margin-bottom: 12px; }
+
+        .suggestion-section {
+            margin-top: 20px;
+            border-top: 2px solid #eef2f6;
+            padding-top: 18px;
+        }
+        .suggestion-section h4 { font-size: 16px; font-weight: 600; color: #0f172a; margin-bottom: 12px; }
+        .suggestion-item {
+            margin-bottom: 12px;
+            border: 1px solid #e9edf2;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .suggestion-item .suggestion-header {
+            padding: 10px 16px;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #e9edf2;
+        }
+        .suggestion-item .suggestion-header .tag {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 20px;
+        }
+        .tag-critical { background: #fee2e2; color: #991b1b; }
+        .tag-important { background: #fef9c3; color: #854d0e; }
+        .tag-normal { background: #dbeafe; color: #1e40af; }
+        .suggestion-item .suggestion-header .title { font-weight: 600; font-size: 14px; color: #0f172a; }
+        .suggestion-item .suggestion-header .count { margin-left: auto; font-size: 13px; color: #64748b; }
+        .suggestion-item .suggestion-body { padding: 8px 16px 12px; background: #ffffff; }
+
+        .footer-note {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #94a3b8;
+            border-top: 1px solid #e9edf2;
+            padding-top: 16px;
+            text-align: center;
+        }
+        .text-center { text-align: center; }
+        .mt-8 { margin-top: 8px; }
+        .mb-8 { margin-bottom: 8px; }
+
+        @media (max-width: 1024px) {
+            .sidebar { width: 220px; padding: 20px 12px; }
+            .main-content { margin-left: 220px; padding: 24px 20px; max-width: calc(100% - 220px); }
+            .slide { padding: 24px 20px; }
+        }
+        @media (max-width: 768px) {
+            .sidebar { position: relative; width: 100%; height: auto; border-right: none; border-bottom: 1px solid #e2e8f0; padding: 16px 20px; box-shadow: none; }
+            .main-content { margin-left: 0; max-width: 100%; padding: 16px; }
+            .grid-4 { grid-template-columns: 1fr 1fr; }
+            .chart-row { grid-template-columns: 1fr; }
+            .table-wrap { max-height: 300px; }
+            .slide { padding: 16px; }
+            .stack-bar { height: 26px; }
+            .stack-seg { font-size: 11px; }
+            .pct-labels { font-size: 12px; }
+        }
+        @media (max-width: 480px) {
+            .grid-4 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 左侧目录 ===== -->
+    <nav class="sidebar">
+        <div class="sidebar-brand">📋 目录 <span>新高一1期</span></div>
+        <ul class="toc-list">
+            <li><a href="#slide1"><span class="toc-icon">📌</span> 执行摘要</a></li>
+            <li>
+                <a href="#slide2"><span class="toc-icon">🧑‍🏫</span> 主讲老师分析</a>
+                <ul class="sub-list">
+                    <li><a href="#teacher-ratio">📊 评分占比</a></li>
+                    <li><a href="#teacher-suggest">💡 建议分类</a></li>
+                    <li><a href="#teacher-table">📋 教师评分表</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#slide3"><span class="toc-icon">🤝</span> 咨询老师分析</a>
+                <ul class="sub-list">
+                    <li><a href="#consultant-ratio">📊 评分占比</a></li>
+                    <li><a href="#consultant-issue">💡 问题分类</a></li>
+                    <li><a href="#consultant-table">📋 教师评分表</a></li>
+                </ul>
+            </li>
+            <li><a href="#slide4"><span class="toc-icon">⚡</span> 风险与改进建议</a></li>
+        </ul>
+        <div class="sidebar-footer">报告生成：2026.07.23<br>数据源自169份问卷</div>
+    </nav>
+
+    <!-- ===== 主内容 ===== -->
+    <div class="main-content">
+
+        <!-- ============================== -->
+        <!-- SLIDE 1: 封面 + 执行摘要      -->
+        <!-- ============================== -->
+        <div class="slide" id="slide1">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; margin-bottom: 8px;">
+                <div>
+                    <h1 style="font-size: 32px; font-weight: 700; color: #0f172a;">📊 2026暑假高中线下班课新高一1期</h1>
+                    <div style="font-size: 18px; color: #475569; font-weight: 500; margin-top: 2px;">用户反馈问卷分析报告（更新至7月23日）</div>
+                    <div style="color: #64748b; margin-top: 8px; font-size: 15px;">报告生成：2026年7月23日 &nbsp;|&nbsp; 数据来源：169份有效问卷（总人头554，收集率30.5%）</div>
+                </div>
+                <div style="background: #f1f5f9; padding: 6px 16px; border-radius: 40px; font-weight: 500; font-size: 14px; white-space: nowrap;">📁 覆盖3大校区</div>
+            </div>
+            <div class="subhead" style="margin-top: 16px;">
+                ⚡ <strong>核心结论：</strong>教学端满意度极高（主讲NPS推荐率100%），咨询端NPS推荐率99%；“进度偏快”和“练习量不足”是两大核心痛点。
+            </div>
+
+            <div class="grid-4" style="margin-top: 24px;">
+                <div class="stat-card"><div class="label">📝 总回收问卷</div><div class="value">169</div><div class="sub">有效样本 · 收集率30.5%</div></div>
+                <div class="stat-card"><div class="label">🏆 主讲NPS推荐率</div><div class="value">100%</div><div class="sub">7-10分高分段占100%</div></div>
+                <div class="stat-card"><div class="label">🤝 咨询NPS推荐率</div><div class="value">99%</div><div class="sub">7-10分高分段占99%（有打分的家长）</div></div>
+                <div class="stat-card"><div class="label">⚠️ 主要负面</div><div class="value" style="font-size:28px;">进度快 · 练习少</div><div class="sub">占比超过35%的意见</div></div>
+            </div>
+
+            <div class="chart-row">
+                <div class="chart-box">
+                    <h4>主讲老师评分分布</h4>
+                    <div class="bar-wrapper">
+                        <div class="bar-row"><span class="bar-label">10分</span><div class="bar-track"><div class="bar-fill green" style="width:81.7%;"></div></div><span class="bar-value">81.7%</span></div>
+                        <div class="bar-row"><span class="bar-label">7-9分</span><div class="bar-track"><div class="bar-fill" style="width:18.3%;"></div></div><span class="bar-value">18.3%</span></div>
+                        <div class="bar-row"><span class="bar-label">4-6分</span><div class="bar-track"><div class="bar-fill orange" style="width:0%;"></div></div><span class="bar-value">0%</span></div>
+                        <div class="bar-row"><span class="bar-label">0-3分</span><div class="bar-track"><div class="bar-fill red" style="width:0%;"></div></div><span class="bar-value">0%</span></div>
+                    </div>
+                    <div class="text-center mt-8"><span class="nps-badge">NPS推荐率 100%</span></div>
+                </div>
+                <div class="chart-box">
+                    <h4>咨询老师评分分布（有打分的家长）</h4>
+                    <div class="bar-wrapper">
+                        <div class="bar-row"><span class="bar-label">10分</span><div class="bar-track"><div class="bar-fill green" style="width:84.4%;"></div></div><span class="bar-value">84.4%</span></div>
+                        <div class="bar-row"><span class="bar-label">7-9分</span><div class="bar-track"><div class="bar-fill" style="width:15.0%;"></div></div><span class="bar-value">15.0%</span></div>
+                        <div class="bar-row"><span class="bar-label">4-6分</span><div class="bar-track"><div class="bar-fill orange" style="width:0%;"></div></div><span class="bar-value">0%</span></div>
+                        <div class="bar-row"><span class="bar-label">0-3分</span><div class="bar-track"><div class="bar-fill red" style="width:0.7%;"></div></div><span class="bar-value">0.7%</span></div>
+                    </div>
+                    <div class="text-center mt-8"><span class="nps-badge">NPS推荐率 99%</span></div>
+                </div>
+            </div>
+            <div class="footer-note">
+                * NPS推荐率 = 推荐者(9-10分) + 被动者(7-8分) 合计占比<br>
+                * 主讲评分分母为169人（全部问卷）；咨询评分分母为有打分的家长（147人），约13%家长未对接咨询老师
+            </div>
+        </div>
+
+        <!-- ============================== -->
+        <!-- SLIDE 2: 主讲老师分析          -->
+        <!-- ============================== -->
+        <div class="slide" id="slide2">
+            <div class="slide-header"><h2>🧑‍🏫 主讲老师分析</h2><span class="page-tag">按科目分组 · 含评分分布</span></div>
+
+            <div id="teacher-ratio" style="scroll-margin-top: 20px;">
+                <div style="background: #f8fafc; border-radius: 14px; padding: 16px 20px; margin-bottom: 16px; border: 1px solid #e9edf2;">
+                    <div style="font-weight: 600; font-size: 15px; margin-bottom: 2px;">主讲老师评分占比（n=169）</div>
+                    <div class="stack-bar">
+                        <div class="stack-seg seg-10" style="width:81.7%;"><span class="pct">81.7%</span></div>
+                        <div class="stack-seg seg-79" style="width:18.3%;"><span class="pct">18.3%</span></div>
+                        <div class="stack-seg seg-46 hide-label" style="width:0%;"><span class="pct">0%</span></div>
+                        <div class="stack-seg seg-03 hide-label" style="width:0%;"><span class="pct">0%</span></div>
+                    </div>
+                    <div class="pct-labels">
+                        <span class="item"><span class="dot dot-10"></span>10分 81.7%</span>
+                        <span class="item"><span class="dot dot-79"></span>7-9分 18.3%</span>
+                        <span class="item"><span class="dot dot-46"></span>4-6分 0%</span>
+                        <span class="item"><span class="dot dot-03"></span>0-3分 0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="teacher-suggest" style="scroll-margin-top: 20px;">
+                <div class="suggestion-section" style="border-top: none; padding-top: 0; margin-top: 0;">
+                    <h4>📌 家长主要建议分类</h4>
+                    <div class="suggestion-item">
+                        <div class="suggestion-header"><span class="tag tag-critical">最突出</span><span class="title">进度偏快</span><span class="count">超15条反馈</span></div>
+                        <div class="suggestion-body">
+                            <details open>
+                                <summary>🔊 查看典型案例（点击展开）</summary>
+                                <div class="case-item"><strong>案例1：</strong>“讲的有点快，孩子学的不够扎实。” —— 富邦研习所家长</div>
+                                <div class="case-item"><strong>案例2：</strong>“数学进度再慢一点。” —— 华凯研习所家长</div>
+                                <div class="case-item"><strong>案例3：</strong>“上课速度可以稍微慢一点。” —— 华凯研习所家长</div>
+                                <div class="case-item"><strong>案例4：</strong>“数学课建议讲慢点。” —— 华凯研习所家长</div>
+                            </details>
+                        </div>
+                    </div>
+                    <div class="suggestion-item">
+                        <div class="suggestion-header"><span class="tag tag-important">次突出</span><span class="title">练习量不足</span><span class="count">—</span></div>
+                        <div class="suggestion-body">
+                            <details open>
+                                <summary>📝 查看典型案例（点击展开）</summary>
+                                <div class="case-item"><strong>案例1：</strong>“练习少，孩子们只是学个皮毛，并没有真正把知识点学透。” —— 华凯研习所家长</div>
+                                <div class="case-item"><strong>案例2：</strong>“搭配刷题班，让孩子们多刷刷题，巩固下所学知识点。” —— 华凯研习所家长</div>
+                                <div class="case-item"><strong>案例3：</strong>“建议错题多出几道加练。” —— 华凯研习所家长</div>
+                            </details>
+                        </div>
+                    </div>
+                    <div class="suggestion-item">
+                        <div class="suggestion-header"><span class="tag tag-normal">重要</span><span class="title">课后监督与反馈</span><span class="count">—</span></div>
+                        <div class="suggestion-body">
+                            <details open>
+                                <summary>📞 查看典型案例（点击展开）</summary>
+                                <div class="case-item"><strong>案例1：</strong>“课后的监督更多一点。” —— 华凯研习所家长</div>
+                                <div class="case-item"><strong>案例2：</strong>“建议每次小测统计分数。” —— 华凯研习所家长</div>
+                                <div class="case-item"><strong>案例3：</strong>“希望给孩子课前测，这样也能了解一下孩子学习情况。” —— 万达研习所家长</div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 教师评分表 -->
+            <div id="teacher-table" style="scroll-margin-top: 20px;">
+                <div style="font-weight: 600; margin-top: 20px; margin-bottom: 6px; font-size: 15px;">📋 被点名主讲老师（按科目分组，含评分分布）</div>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th style="width:10%;">科目</th><th style="width:16%;">老师姓名</th><th style="width:10%;text-align:center;">10分</th><th style="width:10%;text-align:center;">7-9分</th><th style="width:10%;text-align:center;">4-6分</th><th style="width:10%;text-align:center;">0-3分</th><th>代表性评价（折叠查看）</th></tr></thead>
+                        <tbody>
+                            <!-- 数学 -->
+                            <tr class="subject-group"><td colspan="6">📐 数学</td></tr>
+                            <tr><td>数学</td><td>段佳庆</td><td style="text-align:center;">30</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“认真负责，能精确找到孩子的问题所在”</div><div class="case-item">“老师非常负责任，每天下课后反馈孩子的上课情况”</div><div class="case-item">“老师很好 无意见”</div></details></td></tr>
+                            <tr><td>数学</td><td>姚思远</td><td style="text-align:center;">10</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“讲得好，孩子喜欢”</div><div class="case-item">“对孩子有学科中的弱点分析，针对性提高”</div></details></td></tr>
+                            <tr><td>数学</td><td>崔作鹰</td><td style="text-align:center;">11</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“非常好”</div></details></td></tr>
+                            <tr><td>数学</td><td>郭彧</td><td style="text-align:center;">2</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item"><strong>正面：</strong>“老师都不错，问的时候有耐心”</div><div class="case-item"><strong>负面：</strong>“课后的监督更多一点”（建议）</div></details></td></tr>
+                            <tr><td>数学</td><td>王伟</td><td style="text-align:center;">4</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“王老师，讲解很到位，能让孩子很好的理解知识”</div></details></td></tr>
+                            <tr><td>数学</td><td>贾慧杰</td><td style="text-align:center;">6</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“实力强，讲课好，有亲和力”</div></details></td></tr>
+                            <tr><td>数学</td><td>李健</td><td style="text-align:center;">11</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“老师认真负责，幽默风趣，课堂氛围很好”</div><div class="case-item">“逻辑清晰”</div></details></td></tr>
+                            <!-- 物理 -->
+                            <tr class="subject-group"><td colspan="6">⚛️ 物理</td></tr>
+                            <tr><td>物理</td><td>吴坤</td><td style="text-align:center;">8</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“挺好的”</div></details></td></tr>
+                            <tr><td>物理</td><td>李胤良</td><td style="text-align:center;">2</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“老师都不错，问的时候有耐心”</div></details></td></tr>
+                            <tr><td>物理</td><td>陈宜兵</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“数学进度再慢一点”（建议）</div></details></td></tr>
+                            <tr><td>物理</td><td>戴雨横</td><td style="text-align:center;">5</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“很好”</div></details></td></tr>
+                            <tr><td>物理</td><td>吕振东</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“都特别好”</div></details></td></tr>
+                            <!-- 化学 -->
+                            <tr class="subject-group"><td colspan="6">🧪 化学</td></tr>
+                            <tr><td>化学</td><td>孙世姣</td><td style="text-align:center;">11</td><td style="text-align:center;">4</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“授课过程思路清晰”</div><div class="case-item">“老师认真负责”</div></details></td></tr>
+                            <tr><td>化学</td><td>吕强</td><td style="text-align:center;">5</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“老师都不错，问的时候有耐心”</div></details></td></tr>
+                            <tr><td>化学</td><td>李昕一</td><td style="text-align:center;">4</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>化学</td><td>莫瑶</td><td style="text-align:center;">5</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“希望讲小测作业的时候能把小测作业投到黑板上”（建议）</div></details></td></tr>
+                            <tr><td>化学</td><td>申晓东</td><td style="text-align:center;">9</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“更多关注孩子的弱点”（建议）</div></details></td></tr>
+                            <!-- 生物 -->
+                            <tr class="subject-group"><td colspan="6">🧬 生物</td></tr>
+                            <tr><td>生物</td><td>刘娜</td><td style="text-align:center;">3</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“目前没有什么建议，觉得老师讲的挺好”</div></details></td></tr>
+                            <tr><td>生物</td><td>代影妹</td><td style="text-align:center;">1</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“可以再多讲些难题”（建议）</div></details></td></tr>
+                            <!-- 英语 -->
+                            <tr class="subject-group"><td colspan="6">🌍 英语</td></tr>
+                            <tr><td>英语</td><td>李宇珊</td><td style="text-align:center;">16</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“实力强，讲课好，有亲和力”</div><div class="case-item">“讲的有点快，孩子学的不够扎实”（负面）</div><div class="case-item">“老师讲非常生动，形象条理清楚”</div></details></td></tr>
+                            <tr><td>英语</td><td>刘琦</td><td style="text-align:center;">0</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“讲得好，孩子喜欢”</div></details></td></tr>
+                            <tr><td>英语</td><td>轩雅颖</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">暂未收到评价</div></details></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="footer-note">* 仅列出被问卷提及的老师（正面或负面），未提及者不展示。评分分布基于该老师收到的有效打分次数统计，部分老师未收到具体评语显示“暂未收到评价”。</div>
+            </div>
+        </div>
+
+        <!-- ============================== -->
+        <!-- SLIDE 3: 咨询老师分析（已删除立德研习所） -->
+        <!-- ============================== -->
+        <div class="slide" id="slide3">
+            <div class="slide-header"><h2>🤝 咨询老师分析</h2><span class="page-tag">按研习所分组 · 含评分分布</span></div>
+
+            <div id="consultant-ratio" style="scroll-margin-top: 20px;">
+                <div style="background: #f8fafc; border-radius: 14px; padding: 16px 20px; margin-bottom: 16px; border: 1px solid #e9edf2;">
+                    <div style="font-weight: 600; font-size: 15px; margin-bottom: 2px;">咨询老师评分占比（有打分的家长，n=147）</div>
+                    <div class="stack-bar">
+                        <div class="stack-seg seg-10" style="width:84.4%;"><span class="pct">84.4%</span></div>
+                        <div class="stack-seg seg-79" style="width:15.0%;"><span class="pct">15.0%</span></div>
+                        <div class="stack-seg seg-46 hide-label" style="width:0%;"><span class="pct">0%</span></div>
+                        <div class="stack-seg seg-03 hide-label" style="width:0.7%;"><span class="pct">0.7%</span></div>
+                    </div>
+                    <div class="pct-labels">
+                        <span class="item"><span class="dot dot-10"></span>10分 84.4%</span>
+                        <span class="item"><span class="dot dot-79"></span>7-9分 15.0%</span>
+                        <span class="item"><span class="dot dot-46"></span>4-6分 0%</span>
+                        <span class="item"><span class="dot dot-03"></span>0-3分 0.7%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="consultant-issue" style="scroll-margin-top: 20px;">
+                <div class="suggestion-section" style="border-top: none; padding-top: 0; margin-top: 0;">
+                    <h4>📌 咨询环节主要问题分类</h4>
+                    <div class="suggestion-item">
+                        <div class="suggestion-header"><span class="tag tag-normal">常见</span><span class="title">信息沟通不充分</span><span class="count">—</span></div>
+                        <div class="suggestion-body">
+                            <details open>
+                                <summary>📋 查看典型案例（点击展开）</summary>
+                                <div class="case-item"><strong>案例1：</strong>“希望课前能把讲课老师的资料发给我们或者给我们几个备选的老师，以便孩子更好的学习。” —— 富邦研习所家长</div>
+                                <div class="case-item"><strong>案例2：</strong>“后续要上的课程未讲解清楚。” —— 华凯研习所家长</div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 严重负面：佳佳/武烁烁 -->
+            <div style="margin-top: 20px; background: #fef2f2; padding: 16px 20px; border-radius: 12px; border-left: 6px solid #dc2626;">
+                <div style="display: flex; gap: 12px;">
+                    <span style="font-size:20px;">🚨</span>
+                    <div style="flex:1;">
+                        <div><strong>严重负面（销售沟通问题）</strong> — <strong>华凯研习所</strong> <strong>佳佳（武烁烁）</strong> 被投诉“回消息太慢，不满意不给退费”，获0-3分。家长建议：“以后回消息可以再快一点”。</div>
+                        <div class="qa-block" style="margin-top:8px;">
+                            <div class="qa-title">🔍 质检核查</div>
+                            <div class="qa-detail">
+                                <p>经核查，家长投诉“回复消息太慢、不满意不给退费”与事实不符。</p>
+                                <p><strong>学员信息：</strong>崔朗璇，学员编号337311919709，微信名称“爱暖暖”。上过崔作鹰老师的中考冲刺班，暑假新高一课程于7月7日退掉1期班（仍在班级群，可收到问卷），7月19日退掉2期班。</p>
+                                <p><strong>事件还原：</strong></p>
+                                <ul>
+                                    <li>家长反馈武烁烁“回消息太慢”，结合业务沟通核实，除中考地推期间回复稍有延迟外，其余时间均为秒回电话。</li>
+                                    <li>家长所报暑假新高一课程先后退掉1期、2期班，但仍在班级群中，问卷通过群渠道触达并完成提交。</li>
+                                </ul>
+                                <p style="margin-top: 6px; color: #475569;">经核查以及结合跟业务沟通，回复时长除了中考地推的那几天回的他稍微慢一点儿，别的就是秒给他回电话。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 咨询老师详细评价表格（仅保留富邦、华凯、万达） -->
+            <div id="consultant-table" style="scroll-margin-top: 20px;">
+                <div style="font-weight: 600; margin-top: 20px; margin-bottom: 6px; font-size: 15px;">📋 咨询老师详细评价（按研习所分组）</div>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th style="width:12%;">研习所</th><th style="width:14%;">咨询姓名</th><th style="width:14%;">真实姓名</th><th style="width:10%;text-align:center;">10分</th><th style="width:10%;text-align:center;">7-9分</th><th style="width:10%;text-align:center;">4-6分</th><th style="width:10%;text-align:center;">0-3分</th><th>代表性评价（折叠查看）</th></tr></thead>
+                        <tbody>
+                            <!-- 富邦研习所 -->
+                            <tr class="campus-group"><td colspan="8">🏫 富邦研习所</td></tr>
+                            <tr><td>富邦</td><td>柚柚</td><td>杜晶晶</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“回复及时”</div></details></td></tr>
+                            <tr><td>富邦</td><td>柒柒</td><td>郝晴</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">暂未收到评价</div></details></td></tr>
+                            <tr><td>富邦</td><td>橙橙</td><td>刘卉</td><td style="text-align:center;">5</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“老师都很负责任”</div></details></td></tr>
+                            <tr><td>富邦</td><td>木木</td><td>刘康</td><td style="text-align:center;">5</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“老师热情，有耐心！”</div></details></td></tr>
+                            <tr><td>富邦</td><td>小杨/小洋</td><td>杨巧丽</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">暂未收到评价</div></details></td></tr>
+                            <!-- 华凯研习所 -->
+                            <tr class="campus-group"><td colspan="8">🏫 华凯研习所</td></tr>
+                            <tr><td>华凯</td><td>柚子</td><td>冀珍珍</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">暂未收到评价</div></details></td></tr>
+                            <tr><td>华凯</td><td>沫沫</td><td>郝爽</td><td style="text-align:center;">0</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“12天的课再附加几天免费刷题班，让孩子们多巩固下更好”（建议）</div></details></td></tr>
+                            <tr><td>华凯</td><td>安安</td><td>李芬芬</td><td style="text-align:center;">7</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无，感觉非常好”</div></details></td></tr>
+                            <tr><td>华凯</td><td>宸宸</td><td>刘子义</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无意见”</div></details></td></tr>
+                            <tr><td>华凯</td><td>靓靓</td><td>孙丽冉</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">暂未收到评价</div></details></td></tr>
+                            <tr><td>华凯</td><td>静静</td><td>王静妍</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">暂未收到评价</div></details></td></tr>
+                            <tr><td>华凯</td><td>佳佳</td><td>武烁烁</td><td style="text-align:center;">3</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">1</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item"><strong>正面：</strong>“耐心”</div><div class="case-item"><strong>负面：</strong>“回消息太慢，不满意不给退费”（0-3分）</div>
+                                <div class="qa-block" style="margin-top:6px;">
+                                    <div class="qa-title">🔍 质检核查</div>
+                                    <div class="qa-detail">
+                                        <p>经核查，家长投诉“回复消息太慢、不满意不给退费”与事实不符。</p>
+                                        <p><strong>学员信息：</strong>崔朗璇，学员编号337311919709，微信名称“爱暖暖”。上过崔作鹰老师的中考冲刺班，暑假新高一课程于7月7日退掉1期班（仍在班级群，可收到问卷），7月19日退掉2期班。</p>
+                                        <p><strong>事件还原：</strong></p>
+                                        <ul>
+                                            <li>家长反馈武烁烁“回消息太慢”，结合业务沟通核实，除中考地推期间回复稍有延迟外，其余时间均为秒回电话。</li>
+                                            <li>家长所报暑假新高一课程先后退掉1期、2期班，但仍在班级群中，问卷通过群渠道触达并完成提交。</li>
+                                        </ul>
+                                        <p style="margin-top: 6px; color: #475569;">经核查以及结合跟业务沟通，回复时长除了中考地推的那几天回的他稍微慢一点儿，别的就是秒给他回电话。</p>
+                                    </div>
+                                </div>
+                                </details></td></tr>
+                            <!-- 万达研习所 -->
+                            <tr class="campus-group"><td colspan="8">🏫 万达研习所</td></tr>
+                            <tr><td>万达</td><td>刘久</td><td>刘久</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">暂未收到评价</div></details></td></tr>
+                            <tr><td>万达</td><td>小杜</td><td>杜杰</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">暂未收到评价</div></details></td></tr>
+                            <tr><td>万达</td><td>郭老师</td><td>郭超轶</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">暂未收到评价</div></details></td></tr>
+                            <tr><td>万达</td><td>楠楠</td><td>杨洁霞</td><td style="text-align:center;">9</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“讲解介绍很全面，很好”</div><div class="case-item">“挺好”</div></details></td></tr>
+                            <tr><td>万达</td><td>阳阳</td><td>于海梅</td><td style="text-align:center;">5</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“服务十分热情，解答十分耐心”</div><div class="case-item">“老师对这个课程介绍非常到位”</div></details></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="footer-note">* 数据源自“您对接的咨询老师姓名”列及对应评分。未收到具体评语的显示“暂未收到评价”。约13%家长未对接咨询老师，没有产生打分，不计入本表统计。“小杨/小洋”为同一人（杨巧丽），已合并展示。</div>
+            </div>
+        </div>
+
+        <!-- ============================== -->
+        <!-- SLIDE 4: 风险与改进建议 -->
+        <!-- ============================== -->
+        <div class="slide" id="slide4">
+            <div class="slide-header"><h2>⚡ 风险与改进建议</h2><span class="page-tag">行动导向</span></div>
+
+            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 12px;">🔴 P0级风险（立即关注）</h3>
+            <div class="priority-p0" style="margin-bottom:0;">
+                <div><strong>个别咨询师（佳佳/武烁烁）</strong>：经质检核查，家长投诉“回消息太慢，不满意不给退费”与事实不符。</div>
+                <div class="qa-block" style="margin-top: 10px;">
+                    <div class="qa-title">🔍 质检核查</div>
+                    <div class="qa-detail">
+                        <p><strong>学员信息：</strong>崔朗璇，学员编号337311919709，微信名称“爱暖暖”。上过崔作鹰老师的中考冲刺班，暑假新高一课程于7月7日退掉1期班（仍在班级群，可收到问卷），7月19日退掉2期班。</p>
+                        <p><strong>事件还原：</strong></p>
+                        <ul>
+                            <li>家长反馈武烁烁“回消息太慢”，结合业务沟通核实，除中考地推期间回复稍有延迟外，其余时间均为秒回电话。</li>
+                            <li>家长所报暑假新高一课程先后退掉1期、2期班，但仍在班级群中，问卷通过群渠道触达并完成提交。</li>
+                        </ul>
+                        <p style="margin-top: 6px; color: #475569;">经核查以及结合跟业务沟通，回复时长除了中考地推的那几天回的他稍微慢一点儿，别的就是秒给他回电话。</p>
+                    </div>
+                </div>
+                <div style="margin-top: 10px; border-top: 1px solid #fca5a5; padding-top: 10px;">
+                    <strong>建议：</strong>加强咨询师服务响应时效的日常管理，确保在特殊时期（如地推活动）提前做好家长告知和人员调配，避免因回复延迟引发误解和投诉。
+                </div>
+            </div>
+
+            <h3 style="font-size: 18px; font-weight: 600; margin-top: 24px; margin-bottom: 12px;">🟡 P1级（高优先级）</h3>
+            <div class="priority-p1" style="margin-bottom:0;">
+                <ul style="margin-top:8px; padding-left:20px;">
+                    <li><strong>优化教学进度</strong>：根据学生实际接受程度动态调整速度，增加课堂互动和笔记时间，避免“赶进度”。</li>
+                    <li><strong>增加练习与刷题班</strong>：在正课之外配套刷题/巩固课程，强化知识点应用。</li>
+                    <li><strong>强化课后监督</strong>：建立小测成绩统计与反馈机制，定期向家长通报学习情况。</li>
+                </ul>
+            </div>
+
+            <h3 style="font-size: 18px; font-weight: 600; margin-top: 24px; margin-bottom: 12px;">🔵 P2级（持续改进）</h3>
+            <div class="priority-p2" style="margin-bottom:0;">
+                <ul style="margin-top:8px; padding-left:20px;">
+                    <li><strong>教师更换透明化</strong>：如遇教师变动，须提前向家长说明原因并取得理解。</li>
+                    <li><strong>提升咨询响应速度</strong>：设定合理的回复时效指标，及时解决家长疑问和退费诉求。</li>
+                    <li><strong>丰富教学辅助工具</strong>：将小测、作业投屏展示，方便学生对照订正。</li>
+                </ul>
+            </div>
+
+            <div class="footer-note" style="margin-top:24px;">
+                报告基于2026年7月19日-23日高中班课问卷数据 · 共169份反馈 · 覆盖富邦、华凯、万达三大校区
+            </div>
+        </div>
+
+    </div> <!-- end main-content -->
+
+</body>
+</html>

@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026暑假一对一托管1期高中阶段用户反馈问卷分析报告（更新至7月23日）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: #f0f4f9;
+            color: #1e293b;
+            padding: 0;
+            display: flex;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: #ffffff;
+            border-right: 1px solid #e2e8f0;
+            padding: 32px 20px;
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: 2px 0 12px rgba(0,0,0,0.04);
+        }
+        .sidebar-brand {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .sidebar-brand span {
+            background: #2563eb;
+            color: white;
+            font-size: 12px;
+            border-radius: 6px;
+            padding: 2px 10px;
+            margin-left: 4px;
+        }
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+        .toc-list li { margin-bottom: 2px; }
+        .toc-list a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            color: #334155;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.15s;
+            border-left: 3px solid transparent;
+        }
+        .toc-list a:hover { background: #f1f5f9; color: #0f172a; border-left-color: #2563eb; }
+        .toc-icon { font-size: 16px; width: 24px; text-align: center; flex-shrink: 0; }
+        .toc-list .sub-list {
+            list-style: none;
+            padding-left: 36px;
+            margin-top: 2px;
+            margin-bottom: 4px;
+        }
+        .toc-list .sub-list a {
+            font-size: 13px;
+            font-weight: 400;
+            color: #475569;
+            padding: 4px 10px;
+            border-left-color: transparent;
+        }
+        .toc-list .sub-list a:hover { background: #f1f5f9; color: #0f172a; border-left-color: #94a3b8; }
+        .sidebar-footer {
+            margin-top: 30px;
+            padding-top: 16px;
+            border-top: 1px solid #e9edf2;
+            font-size: 12px;
+            color: #94a3b8;
+            text-align: center;
+        }
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 40px 48px;
+            max-width: calc(100% - 280px);
+        }
+        .slide {
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.12);
+            padding: 40px 48px;
+            scroll-margin-top: 20px;
+        }
+        .slide:last-child { margin-bottom: 0; }
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            border-bottom: 2px solid #eef2f6;
+            padding-bottom: 12px;
+        }
+        .slide-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .slide-header .page-tag {
+            font-size: 13px;
+            color: #94a3b8;
+            background: #f1f5f9;
+            padding: 4px 14px;
+            border-radius: 20px;
+        }
+        .subhead {
+            color: #475569;
+            background: #f8fafc;
+            padding: 12px 20px;
+            border-radius: 12px;
+            border-left: 4px solid #2563eb;
+            font-size: 16px;
+            margin-bottom: 28px;
+        }
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: #f8fafc;
+            border-radius: 14px;
+            padding: 18px 22px;
+            border: 1px solid #e9eef3;
+        }
+        .stat-card .label { font-size: 13px; font-weight: 500; color: #64748b; text-transform: uppercase; letter-spacing: 0.3px; }
+        .stat-card .value { font-size: 34px; font-weight: 700; color: #0f172a; margin-top: 4px; }
+        .stat-card .sub { font-size: 13px; color: #475569; margin-top: 2px; }
+        .badge-green { background: #dcfce7; color: #166534; padding: 2px 14px; border-radius: 20px; font-weight: 600; font-size: 13px; display: inline-block; }
+        .badge-yellow { background: #fef9c3; color: #854d0e; padding: 2px 14px; border-radius: 20px; font-weight: 600; font-size: 13px; display: inline-block; }
+        .badge-red { background: #fee2e2; color: #991b1b; padding: 2px 14px; border-radius: 20px; font-weight: 600; font-size: 13px; display: inline-block; }
+
+        .chart-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 24px;
+            margin: 16px 0 8px;
+        }
+        .chart-box {
+            background: #fafcff;
+            border-radius: 14px;
+            padding: 20px 24px;
+            border: 1px solid #e9edf2;
+        }
+        .chart-box h4 { font-size: 14px; font-weight: 600; color: #1e293b; margin-bottom: 12px; text-align: center; }
+        .bar-wrapper { display: flex; flex-direction: column; gap: 6px; }
+        .bar-row { display: flex; align-items: center; gap: 8px; }
+        .bar-label { width: 44px; font-size: 13px; color: #475569; text-align: right; }
+        .bar-track { flex: 1; height: 18px; background: #e9edf2; border-radius: 12px; overflow: hidden; }
+        .bar-fill { height: 100%; border-radius: 12px; background: #2563eb; transition: width 0.6s ease; }
+        .bar-fill.green { background: #22c55e; }
+        .bar-fill.orange { background: #f59e0b; }
+        .bar-fill.red { background: #ef4444; }
+        .bar-value { width: 34px; font-size: 13px; font-weight: 600; color: #0f172a; }
+        .nps-badge { display: inline-block; background: #dbeafe; color: #1e40af; padding: 4px 14px; border-radius: 30px; font-size: 14px; font-weight: 600; }
+
+        .stack-bar {
+            display: flex;
+            height: 32px;
+            border-radius: 30px;
+            overflow: hidden;
+            margin: 6px 0 10px;
+            background: #e9edf2;
+            position: relative;
+        }
+        .stack-seg {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+            transition: width 0.6s ease;
+            min-width: 0;
+            white-space: nowrap;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        }
+        .stack-seg .pct { font-size: 13px; font-weight: 700; color: #fff; }
+        .stack-seg.hide-label .pct { display: none; }
+        .seg-10 { background: #22c55e; }
+        .seg-79 { background: #3b82f6; }
+        .seg-46 { background: #f59e0b; }
+        .seg-03 { background: #ef4444; }
+
+        .pct-labels {
+            display: flex;
+            justify-content: space-around;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1e293b;
+            padding: 4px 0 2px;
+            flex-wrap: wrap;
+            gap: 6px 16px;
+        }
+        .pct-labels .item { display: flex; align-items: center; gap: 4px; }
+        .pct-labels .dot { display: inline-block; width: 12px; height: 12px; border-radius: 4px; margin-right: 4px; }
+        .dot-10 { background: #22c55e; }
+        .dot-79 { background: #3b82f6; }
+        .dot-46 { background: #f59e0b; }
+        .dot-03 { background: #ef4444; }
+
+        .table-wrap {
+            max-height: 480px;
+            overflow-y: auto;
+            border: 1px solid #e9edf2;
+            border-radius: 12px;
+            margin-top: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        table th {
+            background: #f1f5f9;
+            padding: 8px 10px;
+            text-align: left;
+            font-weight: 600;
+            color: #1e293b;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+        table td { padding: 6px 10px; border-bottom: 1px solid #eef2f6; vertical-align: middle; }
+        table tr:hover { background: #f8fafc; }
+        .subject-group td, .campus-group td { background: #eef2ff; font-weight: 700; color: #1e40af; }
+        .campus-group td { background: #f1f5f9; color: #0f172a; }
+
+        details { margin-top: 2px; border: 1px solid #e2e8f0; border-radius: 6px; padding: 4px 10px; background: #fafcff; }
+        details summary { font-weight: 600; cursor: pointer; color: #2563eb; padding: 2px 0; font-size: 12px; }
+        details .case-item { padding: 3px 0 3px 14px; border-left: 3px solid #94a3b8; margin: 3px 0; font-size: 12px; color: #334155; line-height: 1.5; }
+        details .case-item strong { color: #0f172a; }
+
+        .qa-block {
+            margin-top: 8px;
+            padding: 10px 14px;
+            background: #f8fafc;
+            border-radius: 6px;
+            border-left: 4px solid #3b82f6;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .qa-block .qa-title { font-weight: 600; color: #1e40af; }
+        .qa-block ul { margin: 4px 0 0 18px; }
+        .qa-block ul li { margin-bottom: 4px; }
+
+        .priority-p0 { background: #fef2f2; border-left: 6px solid #dc2626; padding: 16px 20px; border-radius: 12px; margin-bottom: 12px; }
+        .priority-p1 { background: #fffbeb; border-left: 6px solid #f59e0b; padding: 16px 20px; border-radius: 12px; margin-bottom: 12px; }
+        .priority-p2 { background: #eff6ff; border-left: 6px solid #3b82f6; padding: 16px 20px; border-radius: 12px; margin-bottom: 12px; }
+
+        .suggestion-section {
+            margin-top: 20px;
+            border-top: 2px solid #eef2f6;
+            padding-top: 18px;
+        }
+        .suggestion-section h4 { font-size: 16px; font-weight: 600; color: #0f172a; margin-bottom: 12px; }
+        .suggestion-item {
+            margin-bottom: 12px;
+            border: 1px solid #e9edf2;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .suggestion-item .suggestion-header {
+            padding: 10px 16px;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #e9edf2;
+        }
+        .suggestion-item .suggestion-header .tag {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 20px;
+        }
+        .tag-critical { background: #fee2e2; color: #991b1b; }
+        .tag-important { background: #fef9c3; color: #854d0e; }
+        .tag-normal { background: #dbeafe; color: #1e40af; }
+        .suggestion-item .suggestion-header .title { font-weight: 600; font-size: 14px; color: #0f172a; }
+        .suggestion-item .suggestion-header .count { margin-left: auto; font-size: 13px; color: #64748b; }
+        .suggestion-item .suggestion-body { padding: 8px 16px 12px; background: #ffffff; }
+
+        .footer-note {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #94a3b8;
+            border-top: 1px solid #e9edf2;
+            padding-top: 16px;
+            text-align: center;
+        }
+        .text-center { text-align: center; }
+        .mt-8 { margin-top: 8px; }
+        .mb-8 { margin-bottom: 8px; }
+
+        @media (max-width: 1024px) {
+            .sidebar { width: 220px; padding: 20px 12px; }
+            .main-content { margin-left: 220px; padding: 24px 20px; max-width: calc(100% - 220px); }
+            .slide { padding: 24px 20px; }
+            .chart-row { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .sidebar { position: relative; width: 100%; height: auto; border-right: none; border-bottom: 1px solid #e2e8f0; padding: 16px 20px; box-shadow: none; }
+            .main-content { margin-left: 0; max-width: 100%; padding: 16px; }
+            .grid-4 { grid-template-columns: 1fr 1fr; }
+            .chart-row { grid-template-columns: 1fr; }
+            .table-wrap { max-height: 300px; }
+            .slide { padding: 16px; }
+            .stack-bar { height: 26px; }
+            .stack-seg { font-size: 11px; }
+            .pct-labels { font-size: 12px; }
+        }
+        @media (max-width: 480px) {
+            .grid-4 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 左侧目录 ===== -->
+    <nav class="sidebar">
+        <div class="sidebar-brand">📋 目录 <span>1期高中</span></div>
+        <ul class="toc-list">
+            <li><a href="#slide1"><span class="toc-icon">📌</span> 执行摘要</a></li>
+            <li>
+                <a href="#slide2"><span class="toc-icon">🧑‍🏫</span> 主讲老师分析</a>
+                <ul class="sub-list">
+                    <li><a href="#teacher-ratio">📊 评分占比</a></li>
+                    <li><a href="#teacher-suggest">💡 建议分类</a></li>
+                    <li><a href="#teacher-table">📋 教师评分表</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#slide3"><span class="toc-icon">🤝</span> 咨询老师分析</a>
+                <ul class="sub-list">
+                    <li><a href="#consultant-ratio">📊 评分占比</a></li>
+                    <li><a href="#consultant-issue">💡 问题分类</a></li>
+                    <li><a href="#consultant-table">📋 教师评分表</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#slide4"><span class="toc-icon">📋</span> 学管老师分析</a>
+                <ul class="sub-list">
+                    <li><a href="#manager-ratio">📊 评分占比</a></li>
+                    <li><a href="#manager-issue">💡 问题分类</a></li>
+                    <li><a href="#manager-table">📋 教师评分表</a></li>
+                </ul>
+            </li>
+            <li><a href="#slide5"><span class="toc-icon">⚡</span> 风险与改进建议</a></li>
+        </ul>
+        <div class="sidebar-footer">报告生成：2026.07.23<br>数据源自49份问卷</div>
+    </nav>
+
+    <!-- ===== 主内容 ===== -->
+    <div class="main-content">
+
+        <!-- ============================== -->
+        <!-- SLIDE 1: 封面 + 执行摘要      -->
+        <!-- ============================== -->
+        <div class="slide" id="slide1">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; margin-bottom: 8px;">
+                <div>
+                    <h1 style="font-size: 32px; font-weight: 700; color: #0f172a;">📊 2026暑假一对一托管1期高中阶段</h1>
+                    <div style="font-size: 18px; color: #475569; font-weight: 500; margin-top: 2px;">用户反馈问卷分析报告（更新至7月23日）</div>
+                    <div style="color: #64748b; margin-top: 8px; font-size: 15px;">报告生成：2026年7月23日 &nbsp;|&nbsp; 数据来源：49份有效问卷（总人头551，收集率8.9%）</div>
+                </div>
+                <div style="background: #f1f5f9; padding: 6px 16px; border-radius: 40px; font-weight: 500; font-size: 14px; white-space: nowrap;">📁 覆盖5大校区</div>
+            </div>
+            <div class="subhead" style="margin-top: 16px;">
+                ⚡ <strong>核心结论：</strong>主讲、咨询、学管三个维度NPS推荐率均为100%，整体满意度极高。个别家长建议增加作业量、加强针对性练习，整体反馈以正面为主。
+            </div>
+
+            <div class="grid-4" style="margin-top: 24px;">
+                <div class="stat-card"><div class="label">📝 总回收问卷</div><div class="value">49</div><div class="sub">有效样本 · 收集率8.9%</div></div>
+                <div class="stat-card"><div class="label">🏆 主讲NPS推荐率</div><div class="value">100%</div><div class="sub">7-10分高分段占100%（有打分的家长）</div></div>
+                <div class="stat-card"><div class="label">🤝 咨询NPS推荐率</div><div class="value">100%</div><div class="sub">7-10分高分段占100%（有打分的家长）</div></div>
+                <div class="stat-card"><div class="label">📋 学管NPS推荐率</div><div class="value">100%</div><div class="sub">7-10分高分段占100%（有打分的家长）</div></div>
+            </div>
+
+            <!-- 三列柱状图 -->
+            <div class="chart-row">
+                <div class="chart-box">
+                    <h4>主讲老师评分分布（有打分的家长）</h4>
+                    <div class="bar-wrapper">
+                        <div class="bar-row"><span class="bar-label">10分</span><div class="bar-track"><div class="bar-fill green" style="width:91.8%;"></div></div><span class="bar-value">91.8%</span></div>
+                        <div class="bar-row"><span class="bar-label">7-9分</span><div class="bar-track"><div class="bar-fill" style="width:8.2%;"></div></div><span class="bar-value">8.2%</span></div>
+                        <div class="bar-row"><span class="bar-label">4-6分</span><div class="bar-track"><div class="bar-fill orange" style="width:0%;"></div></div><span class="bar-value">0%</span></div>
+                        <div class="bar-row"><span class="bar-label">0-3分</span><div class="bar-track"><div class="bar-fill red" style="width:0%;"></div></div><span class="bar-value">0%</span></div>
+                    </div>
+                    <div class="text-center mt-8"><span class="nps-badge">NPS推荐率 100%</span></div>
+                </div>
+                <div class="chart-box">
+                    <h4>咨询老师评分分布（有打分的家长）</h4>
+                    <div class="bar-wrapper">
+                        <div class="bar-row"><span class="bar-label">10分</span><div class="bar-track"><div class="bar-fill green" style="width:85.7%;"></div></div><span class="bar-value">85.7%</span></div>
+                        <div class="bar-row"><span class="bar-label">7-9分</span><div class="bar-track"><div class="bar-fill" style="width:14.3%;"></div></div><span class="bar-value">14.3%</span></div>
+                        <div class="bar-row"><span class="bar-label">4-6分</span><div class="bar-track"><div class="bar-fill orange" style="width:0%;"></div></div><span class="bar-value">0%</span></div>
+                        <div class="bar-row"><span class="bar-label">0-3分</span><div class="bar-track"><div class="bar-fill red" style="width:0%;"></div></div><span class="bar-value">0%</span></div>
+                    </div>
+                    <div class="text-center mt-8"><span class="nps-badge">NPS推荐率 100%</span></div>
+                </div>
+                <div class="chart-box">
+                    <h4>学管老师评分分布（有打分的家长）</h4>
+                    <div class="bar-wrapper">
+                        <div class="bar-row"><span class="bar-label">10分</span><div class="bar-track"><div class="bar-fill green" style="width:83.7%;"></div></div><span class="bar-value">83.7%</span></div>
+                        <div class="bar-row"><span class="bar-label">7-9分</span><div class="bar-track"><div class="bar-fill" style="width:16.3%;"></div></div><span class="bar-value">16.3%</span></div>
+                        <div class="bar-row"><span class="bar-label">4-6分</span><div class="bar-track"><div class="bar-fill orange" style="width:0%;"></div></div><span class="bar-value">0%</span></div>
+                        <div class="bar-row"><span class="bar-label">0-3分</span><div class="bar-track"><div class="bar-fill red" style="width:0%;"></div></div><span class="bar-value">0%</span></div>
+                    </div>
+                    <div class="text-center mt-8"><span class="nps-badge">NPS推荐率 100%</span></div>
+                </div>
+            </div>
+            <div class="footer-note">
+                * NPS推荐率 = 推荐者(9-10分) + 被动者(7-8分) 合计占比<br>
+                * 主讲打分人数49人；咨询打分人数42人（约7人未对接咨询老师，没有产生打分）；学管打分人数43人（约6人未对接学管老师，没有产生打分）
+            </div>
+        </div>
+
+        <!-- ============================== -->
+        <!-- SLIDE 2: 主讲老师分析（按研习所分组） -->
+        <!-- ============================== -->
+        <div class="slide" id="slide2">
+            <div class="slide-header"><h2>🧑‍🏫 主讲老师分析</h2><span class="page-tag">按研习所分组 · 含评分分布</span></div>
+
+            <div id="teacher-ratio" style="scroll-margin-top: 20px;">
+                <div style="background: #f8fafc; border-radius: 14px; padding: 16px 20px; margin-bottom: 16px; border: 1px solid #e9edf2;">
+                    <div style="font-weight: 600; font-size: 15px; margin-bottom: 2px;">主讲老师评分占比（有打分的家长，n=49）</div>
+                    <div class="stack-bar">
+                        <div class="stack-seg seg-10" style="width:91.8%;"><span class="pct">91.8%</span></div>
+                        <div class="stack-seg seg-79" style="width:8.2%;"><span class="pct">8.2%</span></div>
+                        <div class="stack-seg seg-46 hide-label" style="width:0%;"><span class="pct">0%</span></div>
+                        <div class="stack-seg seg-03 hide-label" style="width:0%;"><span class="pct">0%</span></div>
+                    </div>
+                    <div class="pct-labels">
+                        <span class="item"><span class="dot dot-10"></span>10分 91.8%</span>
+                        <span class="item"><span class="dot dot-79"></span>7-9分 8.2%</span>
+                        <span class="item"><span class="dot dot-46"></span>4-6分 0%</span>
+                        <span class="item"><span class="dot dot-03"></span>0-3分 0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="teacher-suggest" style="scroll-margin-top: 20px;">
+                <div class="suggestion-section" style="border-top: none; padding-top: 0; margin-top: 0;">
+                    <h4>📌 家长主要建议分类</h4>
+                    <div class="suggestion-item">
+                        <div class="suggestion-header"><span class="tag tag-critical">最突出</span><span class="title">作业量与练习</span><span class="count">超5条反馈</span></div>
+                        <div class="suggestion-body">
+                            <details open>
+                                <summary>🔊 查看典型案例（点击展开）</summary>
+                                <div class="case-item"><strong>案例1：</strong>“多给孩子留作业，针对性练习。” —— 1中滨江研习所家长</div>
+                                <div class="case-item"><strong>案例2：</strong>“学案尽量个性化一些，课后多一些针对性专项练习。” —— 2中华润研习所家长</div>
+                                <div class="case-item"><strong>案例3：</strong>“作业少留一点点。” —— 1中滨江研习所家长（建议平衡）</div>
+                            </details>
+                        </div>
+                    </div>
+                    <div class="suggestion-item">
+                        <div class="suggestion-header"><span class="tag tag-important">次突出</span><span class="title">教学反馈与沟通</span><span class="count">—</span></div>
+                        <div class="suggestion-body">
+                            <details open>
+                                <summary>📝 查看典型案例（点击展开）</summary>
+                                <div class="case-item"><strong>案例1：</strong>“上课很认真，及时反馈孩子的上课情况，很满意老师们的上课状态。” —— 2中华润研习所家长</div>
+                                <div class="case-item"><strong>案例2：</strong>“老师讲课认真负责，对学生有耐心，课业分析到位。” —— 1中滨江研习所家长</div>
+                            </details>
+                        </div>
+                    </div>
+                    <div class="suggestion-item">
+                        <div class="suggestion-header"><span class="tag tag-normal">重要</span><span class="title">教学进度</span><span class="count">—</span></div>
+                        <div class="suggestion-body">
+                            <details open>
+                                <summary>📞 查看典型案例（点击展开）</summary>
+                                <div class="case-item"><strong>案例1：</strong>“讲的很好，可以再快一点。” —— 1中滨江研习所家长</div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 教师评分表（按研习所分组） -->
+            <div id="teacher-table" style="scroll-margin-top: 20px;">
+                <div style="font-weight: 600; margin-top: 20px; margin-bottom: 6px; font-size: 15px;">📋 被点名主讲老师（按研习所分组，含评分分布）</div>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th style="width:12%;">研习所</th><th style="width:14%;">老师姓名</th><th style="width:10%;text-align:center;">10分</th><th style="width:10%;text-align:center;">7-9分</th><th style="width:10%;text-align:center;">4-6分</th><th style="width:10%;text-align:center;">0-3分</th><th>代表性评价（折叠查看）</th></tr></thead>
+                        <tbody>
+                            <!-- 2中华润 -->
+                            <tr class="campus-group"><td colspan="6">🏫 2中华润研习所</td></tr>
+                            <tr><td>2中华润</td><td>崔泽彬</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“上课很认真，及时反馈孩子的上课情况，很满意老师们的上课状态”</div></details></td></tr>
+                            <tr><td>2中华润</td><td>白欣月</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">（同崔泽彬）</div></details></td></tr>
+                            <tr><td>2中华润</td><td>李娜</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“学案尽量个性化一些，课后多一些针对性专项练习”（建议）</div></details></td></tr>
+                            <tr><td>2中华润</td><td>刘华</td><td style="text-align:center;">0</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>2中华润</td><td>康丽珂</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“很好”</div></details></td></tr>
+                            <tr><td>2中华润</td><td>解子怡</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">（同康丽珂）</div></details></td></tr>
+                            <!-- 43中万达 -->
+                            <tr class="campus-group"><td colspan="6">🏫 43中万达研习所</td></tr>
+                            <tr><td>43中万达</td><td>陈老师</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>马浩言</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“老师课上很认真”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>杨老师</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>王老师（化学）</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>孟晓迪</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>付老师</td><td style="text-align:center;">3</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>王老师</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>刁老师</td><td style="text-align:center;">0</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“上课氛围好，讲解深刻”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>李秀英</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“很好，没什么其他要求”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>张雨</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">（同李秀英）</div></details></td></tr>
+                            <tr><td>43中万达</td><td>邱泽杨</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">（同李秀英）</div></details></td></tr>
+                            <tr><td>43中万达</td><td>赵晨曦</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>孙子悦</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“认真负责”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>刘老师（化学）</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“专业负责，无意见”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>王佳豪</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>刘叶婷</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>李老师</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>张婷</td><td style="text-align:center;">3</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“没有”、“孩子反映挺好”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>王*珂老师</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“没有”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>姜邵雅</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>高月迎</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>何娴</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>冯雨</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>李昕祥</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>康扬硕</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <!-- 1中滨江 -->
+                            <tr class="campus-group"><td colspan="6">🏫 1中滨江研习所</td></tr>
+                            <tr><td>1中滨江</td><td>张兴帅</td><td style="text-align:center;">2</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item"><strong>正面：</strong>“无”</div><div class="case-item"><strong>7-9分：</strong>“无”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>刘朝阳</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“很好”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>高苗苗</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>赵老师</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>李冉冉</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“老师们都很负责任！”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>王立夫</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">（同李冉冉）</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>赵诏</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">（同李冉冉）</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>任淼淼</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>孙仕龙</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“没有”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>庞兴</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“没有”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>车样心</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“没有”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>王宽</td><td style="text-align:center;">3</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“作业少留一点点”（建议）</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>解子健</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“多给孩子留作业，针对性练习”（建议）</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>王燕萍</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">（同解子健）</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>段玉鹏</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>杨晓英</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>胡雅靖</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>韩志远</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“老师很有耐心”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>曹老师</td><td style="text-align:center;">0</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>王鑫磊</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“没什么”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>刘静</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">（同王鑫磊）</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>李老师（物理）</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>龙静宇</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“讲的很好，可以再快一点”（建议）</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>刘玉琦</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“老师讲课认真负责，对学生有耐心，课业分析到位”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>于晓阳</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">（同龙静宇）</div></details></td></tr>
+                            <!-- 红旗 -->
+                            <tr class="campus-group"><td colspan="6">🏫 红旗研习所</td></tr>
+                            <tr><td>红旗</td><td>梁云天</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“没有，讲的挺好”</div></details></td></tr>
+                            <tr><td>红旗</td><td>焦老师</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>红旗</td><td>黄天池</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>红旗</td><td>申智超</td><td style="text-align:center;">3</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“非常好”</div></details></td></tr>
+                            <tr><td>红旗</td><td>孙雨晨</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“很好”</div></details></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="footer-note">* 仅列出被问卷提及的老师（正面或负面），未提及者不展示。评分分布基于该老师收到的有效打分次数统计。</div>
+            </div>
+        </div>
+
+        <!-- ============================== -->
+        <!-- SLIDE 3: 咨询老师分析          -->
+        <!-- ============================== -->
+        <div class="slide" id="slide3">
+            <div class="slide-header"><h2>🤝 咨询老师分析</h2><span class="page-tag">按研习所分组 · 含评分分布</span></div>
+
+            <div id="consultant-ratio" style="scroll-margin-top: 20px;">
+                <div style="background: #f8fafc; border-radius: 14px; padding: 16px 20px; margin-bottom: 16px; border: 1px solid #e9edf2;">
+                    <div style="font-weight: 600; font-size: 15px; margin-bottom: 2px;">咨询老师评分占比（有打分的家长，n=42）</div>
+                    <div class="stack-bar">
+                        <div class="stack-seg seg-10" style="width:85.7%;"><span class="pct">85.7%</span></div>
+                        <div class="stack-seg seg-79" style="width:14.3%;"><span class="pct">14.3%</span></div>
+                        <div class="stack-seg seg-46 hide-label" style="width:0%;"><span class="pct">0%</span></div>
+                        <div class="stack-seg seg-03 hide-label" style="width:0%;"><span class="pct">0%</span></div>
+                    </div>
+                    <div class="pct-labels">
+                        <span class="item"><span class="dot dot-10"></span>10分 85.7%</span>
+                        <span class="item"><span class="dot dot-79"></span>7-9分 14.3%</span>
+                        <span class="item"><span class="dot dot-46"></span>4-6分 0%</span>
+                        <span class="item"><span class="dot dot-03"></span>0-3分 0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="consultant-issue" style="scroll-margin-top: 20px;">
+                <div class="suggestion-section" style="border-top: none; padding-top: 0; margin-top: 0;">
+                    <h4>📌 咨询环节主要问题分类</h4>
+                    <div class="suggestion-item">
+                        <div class="suggestion-header"><span class="tag tag-normal">常见</span><span class="title">信息透明度与教师介绍</span><span class="count">—</span></div>
+                        <div class="suggestion-body">
+                            <details open>
+                                <summary>📋 查看典型案例（点击展开）</summary>
+                                <div class="case-item"><strong>案例1：</strong>“对授课老师的授课风格和背景全面了解一些。” —— 2中华润研习所家长</div>
+                                <div class="case-item"><strong>案例2：</strong>“给家长提供的服务有点少。” —— 1中滨江研习所家长</div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 咨询老师详细评价表格 -->
+            <div id="consultant-table" style="scroll-margin-top: 20px;">
+                <div style="font-weight: 600; margin-top: 20px; margin-bottom: 6px; font-size: 15px;">📋 咨询老师详细评价（按研习所分组）</div>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th style="width:12%;">研习所</th><th style="width:14%;">咨询姓名</th><th style="width:14%;">真实姓名</th><th style="width:10%;text-align:center;">10分</th><th style="width:10%;text-align:center;">7-9分</th><th style="width:10%;text-align:center;">4-6分</th><th style="width:10%;text-align:center;">0-3分</th><th>代表性评价（折叠查看）</th></tr></thead>
+                        <tbody>
+                            <!-- 2中华润 -->
+                            <tr class="campus-group"><td colspan="8">🏫 2中华润研习所</td></tr>
+                            <tr><td>2中华润</td><td>白老师</td><td>白老师</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>2中华润</td><td>彤彤老师</td><td>彤彤老师</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“没有”</div></details></td></tr>
+                            <tr><td>2中华润</td><td>张*晴</td><td>张*晴</td><td style="text-align:center;">0</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>2中华润</td><td>刘老师</td><td>刘老师</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“很好”</div></details></td></tr>
+                            <!-- 43中万达 -->
+                            <tr class="campus-group"><td colspan="8">🏫 43中万达研习所</td></tr>
+                            <tr><td>43中万达</td><td>孔老师</td><td>孔老师</td><td style="text-align:center;">4</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>王老师</td><td>王老师</td><td style="text-align:center;">0</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“没有”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>赵晓亚</td><td>赵晓亚</td><td style="text-align:center;">6</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“服务态度很好”、“专业负责，无意见”、“满意无意见”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>薄欢</td><td>薄欢</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>小洁老师</td><td>小洁老师</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>宋洪峰</td><td>宋洪峰</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“已经很好了”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>宋*峰老师</td><td>宋*峰老师</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“没有”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>宋老师</td><td>宋老师</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“没有”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>焦老师</td><td>焦老师</td><td style="text-align:center;">0</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <!-- 1中滨江 -->
+                            <tr class="campus-group"><td colspan="8">🏫 1中滨江研习所</td></tr>
+                            <tr><td>1中滨江</td><td>范竞学</td><td>范竞学</td><td style="text-align:center;">1</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>刘老师</td><td>刘老师</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“很好”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>程梅</td><td>程梅</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“程老师非常负责任。安排的课程很满意”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>韩老师</td><td>韩老师</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>王老师</td><td>王老师</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“没有”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>王硕磊老师</td><td>王硕磊</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“非常专业全面耐心周到”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>曹老师</td><td>曹老师</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>梁老师</td><td>梁老师</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>智老师</td><td>智老师</td><td style="text-align:center;">2</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <!-- 红旗 -->
+                            <tr class="campus-group"><td colspan="8">🏫 红旗研习所</td></tr>
+                            <tr><td>红旗</td><td>孔婷婷</td><td>孔婷婷</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>红旗</td><td>孔老师</td><td>孔老师</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“好呀”、“好”</div></details></td></tr>
+                            <tr><td>红旗</td><td>王泽威</td><td>王泽威</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“没有，挺热心的”</div></details></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="footer-note">* 数据源自“您对接的咨询老师姓名”列及对应评分。未收到具体评语的显示“无”或“暂未收到评价”。约14%家长未对接咨询老师，没有产生打分，不计入本表统计。</div>
+            </div>
+        </div>
+
+        <!-- ============================== -->
+        <!-- SLIDE 4: 学管老师分析          -->
+        <!-- ============================== -->
+        <div class="slide" id="slide4">
+            <div class="slide-header"><h2>📋 学管老师分析</h2><span class="page-tag">按研习所分组 · 含评分分布</span></div>
+
+            <div id="manager-ratio" style="scroll-margin-top: 20px;">
+                <div style="background: #f8fafc; border-radius: 14px; padding: 16px 20px; margin-bottom: 16px; border: 1px solid #e9edf2;">
+                    <div style="font-weight: 600; font-size: 15px; margin-bottom: 2px;">学管老师评分占比（有打分的家长，n=43）</div>
+                    <div class="stack-bar">
+                        <div class="stack-seg seg-10" style="width:83.7%;"><span class="pct">83.7%</span></div>
+                        <div class="stack-seg seg-79" style="width:16.3%;"><span class="pct">16.3%</span></div>
+                        <div class="stack-seg seg-46 hide-label" style="width:0%;"><span class="pct">0%</span></div>
+                        <div class="stack-seg seg-03 hide-label" style="width:0%;"><span class="pct">0%</span></div>
+                    </div>
+                    <div class="pct-labels">
+                        <span class="item"><span class="dot dot-10"></span>10分 83.7%</span>
+                        <span class="item"><span class="dot dot-79"></span>7-9分 16.3%</span>
+                        <span class="item"><span class="dot dot-46"></span>4-6分 0%</span>
+                        <span class="item"><span class="dot dot-03"></span>0-3分 0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="manager-issue" style="scroll-margin-top: 20px;">
+                <div class="suggestion-section" style="border-top: none; padding-top: 0; margin-top: 0;">
+                    <h4>📌 学管环节主要问题分类</h4>
+                    <div class="suggestion-item">
+                        <div class="suggestion-header"><span class="tag tag-normal">常见</span><span class="title">沟通顺畅，服务到位</span><span class="count">（普遍好评）</span></div>
+                        <div class="suggestion-body">
+                            <details open>
+                                <summary>📋 查看典型案例（点击展开）</summary>
+                                <div class="case-item"><strong>案例1：</strong>“多为家长和孩子提供优质服务。” —— 1中滨江研习所家长</div>
+                                <div class="case-item"><strong>案例2：</strong>“非常专业全面耐心周到。” —— 1中滨江研习所家长</div>
+                            </details>
+                        </div>
+                    </div>
+                    <div class="suggestion-item">
+                        <div class="suggestion-header"><span class="tag tag-important">次突出</span><span class="title">教师信息了解</span><span class="count">—</span></div>
+                        <div class="suggestion-body">
+                            <details open>
+                                <summary>📞 查看典型案例（点击展开）</summary>
+                                <div class="case-item"><strong>案例1：</strong>“对授课老师的授课风格和背景全面了解一些。” —— 2中华润研习所家长</div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 学管老师详细评价表格 -->
+            <div id="manager-table" style="scroll-margin-top: 20px;">
+                <div style="font-weight: 600; margin-top: 20px; margin-bottom: 6px; font-size: 15px;">📋 学管老师详细评价（按研习所分组）</div>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th style="width:12%;">研习所</th><th style="width:14%;">学管姓名</th><th style="width:14%;">真实姓名</th><th style="width:10%;text-align:center;">10分</th><th style="width:10%;text-align:center;">7-9分</th><th style="width:10%;text-align:center;">4-6分</th><th style="width:10%;text-align:center;">0-3分</th><th>代表性评价（折叠查看）</th></tr></thead>
+                        <tbody>
+                            <!-- 2中华润 -->
+                            <tr class="campus-group"><td colspan="8">🏫 2中华润研习所</td></tr>
+                            <tr><td>2中华润</td><td>刘老师</td><td>刘老师</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”、“很好”</div></details></td></tr>
+                            <tr><td>2中华润</td><td>小智小刘两位老师</td><td>小智小刘</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“对授课老师的授课风格和背景全面了解一些”（建议）</div></details></td></tr>
+                            <tr><td>2中华润</td><td>张*晴</td><td>张*晴</td><td style="text-align:center;">0</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <!-- 43中万达 -->
+                            <tr class="campus-group"><td colspan="8">🏫 43中万达研习所</td></tr>
+                            <tr><td>43中万达</td><td>叶老师</td><td>叶老师</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>刘老师</td><td>刘老师</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>孔老师</td><td>孔老师</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>赵晓亚</td><td>赵晓亚</td><td style="text-align:center;">4</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“满意无意见”、“很好，真诚热心。认真负责。”、“感谢赵老师的认真负责”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>黄佳慧</td><td>黄佳慧</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无，特别好”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>黄老师</td><td>黄老师</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>韩*雅老师</td><td>韩*雅</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“没有”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>韩老师</td><td>韩老师</td><td style="text-align:center;">1</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“没有”</div></details></td></tr>
+                            <tr><td>43中万达</td><td>赵老师</td><td>赵老师</td><td style="text-align:center;">0</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“没有”</div></details></td></tr>
+                            <!-- 1中滨江 -->
+                            <tr class="campus-group"><td colspan="8">🏫 1中滨江研习所</td></tr>
+                            <tr><td>1中滨江</td><td>范竞学</td><td>范竞学</td><td style="text-align:center;">1</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>贺老师</td><td>贺老师</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“很好”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>王老师</td><td>王老师</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“没有”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>王硕磊老师</td><td>王硕磊</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“非常专业全面耐心周到”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>曹老师</td><td>曹老师</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>程梅</td><td>程梅</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>1中滨江</td><td>智老师</td><td>智老师</td><td style="text-align:center;">2</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <!-- 红旗 -->
+                            <tr class="campus-group"><td colspan="8">🏫 红旗研习所</td></tr>
+                            <tr><td>红旗</td><td>孔婷婷</td><td>孔婷婷</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“无”</div></details></td></tr>
+                            <tr><td>红旗</td><td>王泽威</td><td>王泽威</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“没有，挺热心的”、“无”</div></details></td></tr>
+                            <tr><td>红旗</td><td>孔老师</td><td>孔老师</td><td style="text-align:center;">2</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td>
+                                <td><details open><summary>查看评价</summary><div class="case-item">“很棒”、“好”</div></details></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="footer-note">* 数据源自“您对接的学管老师姓名”列及对应评分。未收到具体评语的显示“无”或“暂未收到评价”。约12%家长未对接学管老师，没有产生打分，不计入本表统计。</div>
+            </div>
+        </div>
+
+        <!-- ============================== -->
+        <!-- SLIDE 5: 风险与改进建议（独立） -->
+        <!-- ============================== -->
+        <div class="slide" id="slide5">
+            <div class="slide-header"><h2>⚡ 风险与改进建议</h2><span class="page-tag">行动导向</span></div>
+
+            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 12px;">🔴 P0级风险（立即关注）</h3>
+            <div class="priority-p0" style="margin-bottom:0;">
+                <div><strong>无明显P0级风险</strong>：主讲、咨询、学管三个维度NPS推荐率均为100%，无0-3分评价，整体满意度极高。个别4-6分评价仅存在于伴学阶段，高中阶段暂无。</div>
+            </div>
+
+            <h3 style="font-size: 18px; font-weight: 600; margin-top: 24px; margin-bottom: 12px;">🟡 P1级（高优先级）</h3>
+            <div class="priority-p1" style="margin-bottom:0;">
+                <ul style="margin-top:8px; padding-left:20px;">
+                    <li><strong>优化作业量与针对性练习</strong>：根据家长反馈，适当增加作业量和针对性专项练习，同时注意平衡作业负担。</li>
+                    <li><strong>提升教学反馈透明度</strong>：加强课后学习情况反馈，让家长及时了解孩子的上课状态和进步情况。</li>
+                    <li><strong>增强教师信息透明度</strong>：在报课前向家长提供授课老师的风格和背景介绍，便于家长选择。</li>
+                </ul>
+            </div>
+
+            <h3 style="font-size: 18px; font-weight: 600; margin-top: 24px; margin-bottom: 12px;">🔵 P2级（持续改进）</h3>
+            <div class="priority-p2" style="margin-bottom:0;">
+                <ul style="margin-top:8px; padding-left:20px;">
+                    <li><strong>优化学案个性化</strong>：根据学生实际情况，提供更具针对性的学案和练习材料。</li>
+                    <li><strong>持续提升服务品质</strong>：保持学管老师沟通顺畅、排课及时的良好口碑，进一步提升服务细节。</li>
+                    <li><strong>加强教师团队建设</strong>：保持师资稳定性，减少教师更换频次，提升家长信任度。</li>
+                </ul>
+            </div>
+
+            <div class="footer-note" style="margin-top:24px;">
+                报告基于2026年7月21日-23日一对一托管1期高中阶段问卷数据 · 共49份反馈 · 覆盖2中华润、43中万达、1中滨江、红旗、28中五大校区
+            </div>
+        </div>
+
+    </div> <!-- end main-content -->
+
+</body>
+</html>
